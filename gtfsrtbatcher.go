@@ -7,7 +7,7 @@ import (
 	"log"
 	"time"
 
-	mqtt "github.com/eclipse/paho.mqtt.golang"
+	"github.com/eclipse/paho.mqtt.golang"
 	"github.com/golang/protobuf/proto"
 
 	"github.com/pailakka/mqttgtfsrtbatcher/transit_realtime"
@@ -54,7 +54,7 @@ type GTFSRTTimestampedEntity struct {
 func (gtfsrtbatcher *GTFSRTBatch) Init(quit <-chan bool, sendBatch func(payload MQTTPayload)) {
 	gtfsrtbatcher.GTFSRTInput = make(chan *GTFSRTTimestampedEntity, 1000)
 	gtfsrtbatcher.GTFSRTBatch = make(map[uint64]*transit_realtime.FeedEntity)
-	batchSendTimer := time.NewTicker(200 * time.Millisecond)
+	batchSendTimer := time.NewTicker(500 * time.Millisecond)
 
 	go func() {
 		var messageCounter uint64
